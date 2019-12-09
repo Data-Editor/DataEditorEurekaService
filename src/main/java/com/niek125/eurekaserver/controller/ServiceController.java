@@ -28,7 +28,7 @@ public class ServiceController {
             if (index >= instances.size()){
                 index = 0;
             }
-            return instances.get(index).getHomePageUrl();
+            return "http://" + instances.get(index).getIPAddr() + ":" + instances.get(index).getPort();
         }catch (Exception e) {
         }
         return null;
