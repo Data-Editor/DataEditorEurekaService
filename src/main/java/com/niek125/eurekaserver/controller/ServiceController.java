@@ -12,11 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/server-instances")
 public class ServiceController {
-    @Autowired
-    private PeerAwareInstanceRegistry registry;
+    private final PeerAwareInstanceRegistry registry;
     private int index;
 
-    public ServiceController() {
+    @Autowired
+    public ServiceController(PeerAwareInstanceRegistry registry) {
+        this.registry = registry;
         index = 0;
     }
 
@@ -28,7 +29,7 @@ public class ServiceController {
             if (index >= instances.size()){
                 index = 0;
             }
-            return "http://" + instances.get(index).getIPAddr() + ":" + instances.get(index).getPort();
+            return instances.get(index).getIPAddr() + ":" + instances.get(index).getPort();
         }catch (Exception e) {
         }
         return null;
